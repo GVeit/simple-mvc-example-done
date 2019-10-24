@@ -136,6 +136,12 @@ const setName = (req, res) => {
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
   }
+    
+  if (!req.body.name || !req.body.breed || !req.body.age) {
+    // if not respond with a 400 error
+    // (either through json or a web page depending on the client dev)
+    return res.status(400).json({ error: 'name, breed and age are all required' });
+  }
 
   // if required fields are good, then set name
   const name = `${req.body.firstname} ${req.body.lastname}`;
