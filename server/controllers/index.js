@@ -12,11 +12,13 @@ const defaultData = {
 
 const defaultDataDog = {
   name: 'unknown',
-  bedsOwned: 0,
+  age: 0,
+  breed: 'unknown'
 };
 
 // object for us to keep track of the last Cat we made and dynamically update it sometimes
 let lastAdded = new Cat(defaultData);
+
 let lastAddedDog = new Dog(defaultDataDog);
 // function to handle requests to the main page
 // controller functions in Express receive the full HTTP request
