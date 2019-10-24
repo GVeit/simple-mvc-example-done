@@ -50,7 +50,7 @@ const readAllCats = (req, res, callback) => {
   Cat.find(callback);
 };
 
-const readAllDog = (req, res, callback) => {
+const readAllDogs = (req, res, callback) => {
   Dog.find(callback);
 };
 
@@ -144,6 +144,21 @@ const hostPage3 = (req, res) => {
     // actually calls index.jade. A second parameter of JSON can be passed
     // into the jade to be used as variables with #{varName}
   res.render('page3');
+};
+
+const hostPage4 = (req, res) => {
+  // function to call when we get objects back from the database.
+  // With Mongoose's find functions, you will get an err and doc(s) back
+  const callback = (err, docs) => {
+    if (err) {
+      return res.json({ err }); // if error, return it
+    }
+
+    // return success
+    return res.render('page4', { dogs: docs });
+  };
+
+  readAllDogs(req, res, callback);
 };
 
 // function to handle get request to send the name
