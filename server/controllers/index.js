@@ -136,13 +136,13 @@ const setName = (req, res) => {
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
   }
-    
+    /*
   if (!req.body.name || !req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'name, breed and age are all required' });
   }
-
+*/
   // if required fields are good, then set name
   const name = `${req.body.firstname} ${req.body.lastname}`;
 
@@ -236,6 +236,111 @@ const updateLast = (req, res) => {
 
   // if save error, just return an error for now
   savePromise.catch((err) => res.json({ err }));
+};
+
+
+
+const setNameDog = (req, res) => {
+
+  if (!req.body.name || !req.body.breed || !req.body.age) {
+    // if not respond with a 400 error
+    // (either through json or a web page depending on the client dev)
+    return res.status(400).json({ error: 'name, breed and age are all required' });
+  }
+
+  // if required fields are good, then set name
+  const nameDog = `${req.body.name}`;
+
+  // dummy JSON to insert into database
+  const dogData = {
+    nameDog,
+    age: req.body.age,
+  };
+
+  // create a new object of CatModel with the object to save
+  const newDog = new Dog(dogData);
+
+  // create new save promise for the database
+  const savePromiseDog = newDog.save();
+
+  savePromiseDog.then(() => {
+    // set the lastAdded cat to our newest cat object.
+    // This way we can update it dynamically
+    lastAddedDog = newDog;
+    // return success
+    res.json({ name: lastAddedDog.nameDog, age: lastAdded.age });
+  });
+
+  // if error, return it
+  savePromiseDog.catch((err) => res.json({ err }));
+
+  return res;
+};
+
+
+// function to handle requests search for a name and return the object
+// controller functions in Express receive the full HTTP request
+// and a pre-filled out response object to send
+const searchNameDog = (req, res) => {
+  // check if there is a query parameter for name
+  // BUT WAIT!!?!
+  // Why is this req.query and not req.body like the others
+  // This is a GET request. Those come as query parameters in the URL
+  // For POST requests like the other ones in here, those come in a
+  // request body because they aren't a query
+  // POSTS send data to add while GETS query for a page or data (such as a search)
+  if (!req.query.name) {
+    return res.json({ error: 'Name is required to perform a search' });
+  }
+
+  // Call our Cat's static findByName function.
+  // Since this is a static function, we can just call it without an object
+  // pass in a callback (like we specified in the Cat model
+  // Normally would you break this code up, but I'm trying to keep it
+  // together so it's easier to see how the system works
+  // For that reason, I gave it an anonymous callback instead of a
+  // named function you'd have to go find
+  return Dog.findByName(req.query.nameDog, (err, doc) => {
+    // errs, handle them
+    if (err) {
+      return res.json({ err }); // if error, return it
+    }
+
+    // if no matches, let them know
+    // (does not necessarily have to be an error since technically it worked correctly)
+    if (!doc) {
+      return res.json({ error: 'No dogs found' });
+    }
+
+    // if a match, send the match back
+    return res.json({ name: doc.nameDog, age: doc.age });
+  });
+};
+
+// function to handle a request to update the last added object
+// this PURELY exists to show you how to update a model object
+// Normally for an update, you'd get data from the client,
+// search for an object, update the object and put it back
+// We will skip straight to updating an object
+// (that we stored as last added) and putting it back
+const updateLastDog = (req, res) => {
+  // Your model is JSON, so just change a value in it.
+  // This is the benefit of ORM (mongoose) and/or object documents (Mongo NoSQL)
+  // You can treat objects just like that - objects.
+  // Normally you'd find a specific object, but we will only
+  // give the user the ability to update our last object
+  lastAddedDog.age++;
+
+  // once you change all the object properties you want,
+  // then just call the Model object's save function
+  // create a new save promise for the database
+  const savePromiseDog = lastAdded.save();
+
+  // send back the name as a success for now
+  savePromiseDog.then(() => res.json({ name: lastAddedDog.nameDog, age: lastAddedDog.age }));
+
+  // if save error, just return an error for now
+  savePromiseDog.catch((err) => res.json({ err }));
 };
 
 // function to handle a request to any non-real resources (404)

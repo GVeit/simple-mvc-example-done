@@ -19,5 +19,13 @@
       {{/each}}
     </ul>
   {{/if}}
+    
+  {{#if dogs}}
+    <ul>
+      {{#each dogs}}
+        <li> {{this.nameDog}} is {{this.age}} years old</li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </body>
 </html>
