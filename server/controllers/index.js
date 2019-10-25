@@ -345,6 +345,7 @@ const searchNameDog = (req, res) => {
   // For POST requests like the other ones in here, those come in a
   // request body because they aren't a query
   // POSTS send data to add while GETS query for a page or data (such as a search)
+    console.dir(req.query);
   if (!req.query.nameDog) {
     return res.json({ error: 'Name is required to perform a search' });
   }
@@ -352,7 +353,7 @@ const searchNameDog = (req, res) => {
   // Call our Cat's static findByName function.
   // Since this is a static function, we can just call it without an object
   // pass in a callback (like we specified in the Cat model
-  // Normally would you break this code up, but I'm trying to keep it
+  // Normally would you break this code up, but I'm trying o keep it
   // together so it's easier to see how the system works
   // For that reason, I gave it an anonymous callback instead of a
   // named function you'd have to go find
