@@ -303,6 +303,7 @@ const setNameDog = (req, res) => {
   // dummy JSON to insert into database
   const dogData = {
     nameDog,
+    breed: req.body.breed,
     age: req.body.age,
   };
 
@@ -317,7 +318,7 @@ const setNameDog = (req, res) => {
     // This way we can update it dynamically
     lastAddedDog = newDog;
     // return success
-    res.json({ name: lastAddedDog.nameDog, age: lastAdded.age });
+    res.json({ name: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age });
   });
 
   // if error, return it
@@ -362,7 +363,7 @@ const searchNameDog = (req, res) => {
     }
 
     // if a match, send the match back
-    return res.json({ name: doc.nameDog, age: doc.age });
+    return res.json({ name: doc.nameDog, breed: doc.breed, age: doc.age });
   });
 };
 
@@ -386,7 +387,7 @@ const updateLastDog = (req, res) => {
   const savePromiseDog = lastAdded.save();
 
   // send back the name as a success for now
-  savePromiseDog.then(() => res.json({ name: lastAddedDog.nameDog, age: lastAddedDog.age }));
+  savePromiseDog.then(() => res.json({ name: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age }));
 
   // if save error, just return an error for now
   savePromiseDog.catch((err) => res.json({ err }));
