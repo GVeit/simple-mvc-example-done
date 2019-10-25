@@ -183,7 +183,7 @@ const setName = (req, res) => {
   if (!req.body.firstname || !req.body.lastname || !req.body.beds) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
-    return res.status(400).json({ error: 'firstname,lastname and beds are all required' });
+    return res.status(400).json({ error: 'firstname, lastname and beds are all required' });
   }
     /*
   if (!req.body.name || !req.body.breed || !req.body.age) {
