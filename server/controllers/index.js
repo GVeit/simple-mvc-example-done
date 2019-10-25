@@ -318,7 +318,7 @@ const setNameDog = (req, res) => {
     // This way we can update it dynamically
     lastAddedDog = newDog;
     // return success
-    res.json({ name: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age });
+    res.json({ name: lastAddedDog.name, breed: lastAddedDog.breed, age: lastAddedDog.age });
   });
 
   // if error, return it
@@ -350,7 +350,7 @@ const searchNameDog = (req, res) => {
   // together so it's easier to see how the system works
   // For that reason, I gave it an anonymous callback instead of a
   // named function you'd have to go find
-  return Dog.findByName(req.query.nameDog, (err, doc) => {
+  return Dog.findByName(req.query.name, (err, doc) => {
     // errs, handle them
     if (err) {
       return res.json({ err }); // if error, return it
@@ -363,7 +363,7 @@ const searchNameDog = (req, res) => {
     }
 
     // if a match, send the match back
-    return res.json({ name: doc.nameDog, breed: doc.breed, age: doc.age });
+    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
   });
 };
 
@@ -387,7 +387,7 @@ const updateLastDog = (req, res) => {
   const savePromiseDog = lastAdded.save();
 
   // send back the name as a success for now
-  savePromiseDog.then(() => res.json({ name: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age }));
+  savePromiseDog.then(() => res.json({ name: lastAddedDog.name, breed: lastAddedDog.breed, age: lastAddedDog.age }));
 
   // if save error, just return an error for now
   savePromiseDog.catch((err) => res.json({ err }));
