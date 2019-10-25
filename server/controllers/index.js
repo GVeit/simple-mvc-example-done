@@ -435,5 +435,6 @@ module.exports = {
   updateLast,
   updateLastDog,
   searchName,
+  searchNameDog,
   notFound,
 };

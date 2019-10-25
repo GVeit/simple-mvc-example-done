@@ -20,6 +20,7 @@ const router = (app) => {
   app.get('/getName', controllers.getName);
   app.get('/getNameDog', controllers.getNameDog);
   app.get('/findByName', controllers.searchName);
+  app.get('/findByNameDog', controllers.searchNameDog);
 
   // whenever someone goes to the site without a path (AKA the home page), call controllers.index
   // For example www.webpage.com
