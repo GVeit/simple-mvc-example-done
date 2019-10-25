@@ -292,7 +292,7 @@ const updateLast = (req, res) => {
 
 const setNameDog = (req, res) => {
 
-  if (!req.body.nameDog || !req.body.breed || !req.body.age) {
+  if (!req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'name, breed and age are all required' });
