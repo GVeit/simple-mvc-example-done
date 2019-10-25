@@ -13,7 +13,7 @@ const defaultData = {
 const defaultDataDog = {
   nameDog: 'unknown',
   age: 0,
-  breed: 'unknown'
+  breed: 'unknown',
 };
 
 // object for us to keep track of the last Cat we made and dynamically update it sometimes
@@ -137,12 +137,12 @@ const hostPage2 = (req, res) => {
 // controller functions in Express receive the full HTTP request
 // and a pre-filled out response object to send
 const hostPage3 = (req, res) => {
-    // res.render takes a name of a page to render.
-    // These must be in the folder you specified as views in your main app.js file
-    // Additionally, you don't need .jade because you registered the file type
-    // in the app.js as jade. Calling res.render('index')
-    // actually calls index.jade. A second parameter of JSON can be passed
-    // into the jade to be used as variables with #{varName}
+  // res.render takes a name of a page to render.
+  // These must be in the folder you specified as views in your main app.js file
+  // Additionally, you don't need .jade because you registered the file type
+  // in the app.js as jade. Calling res.render('index')
+  // actually calls index.jade. A second parameter of JSON can be passed
+  // into the jade to be used as variables with #{varName}
   res.render('page3');
 };
 
@@ -185,7 +185,7 @@ const setName = (req, res) => {
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'firstname, lastname and beds are all required' });
   }
-    /*
+  /*
   if (!req.body.name || !req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
@@ -220,7 +220,6 @@ const setName = (req, res) => {
 
   return res;
 };
-
 
 
 // function to handle requests search for a name and return the object
@@ -289,7 +288,6 @@ const updateLast = (req, res) => {
 };
 
 
-
 const getNameDog = (req, res) => {
   // res.json returns json to the page.
   // Since this sends back the data through HTTP
@@ -298,9 +296,7 @@ const getNameDog = (req, res) => {
 };
 
 
-
 const setNameDog = (req, res) => {
-
   if (!req.body.nameDog || !req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
@@ -397,7 +393,11 @@ const updateLastDog = (req, res) => {
   const savePromiseDog = lastAdded.save();
 
   // send back the name as a success for now
-  savePromiseDog.then(() => res.json({ nameDog: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age }));
+  savePromiseDog.then(() => res.json({ 
+      nameDog: lastAddedDog.nameDog, 
+      breed: lastAddedDog.breed, 
+      age: lastAddedDog.age 
+  }));
 
   // if save error, just return an error for now
   savePromiseDog.catch((err) => res.json({ err }));
