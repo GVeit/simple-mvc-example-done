@@ -420,6 +420,7 @@ module.exports = {
   setName,
   setNameDog,
   updateLast,
+  updateLastDog,
   searchName,
   notFound,
 };
