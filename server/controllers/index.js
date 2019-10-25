@@ -345,7 +345,7 @@ const searchNameDog = (req, res) => {
   // For POST requests like the other ones in here, those come in a
   // request body because they aren't a query
   // POSTS send data to add while GETS query for a page or data (such as a search)
-  if (!req.query.nameDog) {
+  if (!req.query.name) {
     return res.json({ error: 'Name is required to perform a search' });
   }
 
@@ -356,7 +356,7 @@ const searchNameDog = (req, res) => {
   // together so it's easier to see how the system works
   // For that reason, I gave it an anonymous callback instead of a
   // named function you'd have to go find
-  return Dog.findByName(req.query.nameDog, (err, doc) => {
+  return Dog.findByName(req.query.name, (err, doc) => {
     // errs, handle them
     if (err) {
       return res.json({ err }); // if error, return it
