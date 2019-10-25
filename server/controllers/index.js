@@ -80,7 +80,7 @@ const readCat = (req, res) => {
 };
 
 const readDog = (req, res) => {
-  const name1 = req.query.name;
+  const name1 = req.query.nameDog;
 
   // function to call when we get objects back from the database.
   // With Mongoose's find functions, you will get an err and doc(s) back
@@ -356,7 +356,7 @@ const searchNameDog = (req, res) => {
   // together so it's easier to see how the system works
   // For that reason, I gave it an anonymous callback instead of a
   // named function you'd have to go find
-  return Dog.findByName(req.query.name, (err, doc) => {
+  return Dog.findByName(req.query.nameDog, (err, doc) => {
     // errs, handle them
     if (err) {
       return res.json({ err }); // if error, return it
