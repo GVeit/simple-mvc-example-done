@@ -394,7 +394,7 @@ const updateLastDog = (req, res) => {
 
   // send back the name as a success for now
   savePromiseDog.then(() => res.json({ 
-      nameDog: lastAddedDog.nameDog, 
+      nameDog: lastAddedDog.name, 
       breed: lastAddedDog.breed, 
       age: lastAddedDog.age 
   }));
