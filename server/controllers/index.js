@@ -294,7 +294,7 @@ const getNameDog = (req, res) => {
   // res.json returns json to the page.
   // Since this sends back the data through HTTP
   // you can't send any more data to this user until the next response
-  res.json({ name: lastAdded.nameDog });
+  res.json({ nameDog: lastAdded.nameDog });
 };
 
 
