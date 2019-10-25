@@ -290,9 +290,17 @@ const updateLast = (req, res) => {
 
 
 
+const getNameDog = (req, res) => {
+  // res.json returns json to the page.
+  // Since this sends back the data through HTTP
+  // you can't send any more data to this user until the next response
+  res.json({ name: lastAdded.nameDog });
+};
+
+
 const setNameDog = (req, res) => {
 
-  if (!req.body.breed || !req.body.age) {
+  if (!req.body.nameDog || !req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'name, breed and age are all required' });
@@ -419,6 +427,7 @@ module.exports = {
   readCat,
   readDog,
   getName,
+  getNameDog,
   setName,
   setNameDog,
   updateLast,
