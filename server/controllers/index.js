@@ -11,7 +11,7 @@ const defaultData = {
 };
 
 const defaultDataDog = {
-  name: 'unknown',
+  nameDog: 'unknown',
   age: 0,
   breed: 'unknown'
 };
@@ -80,7 +80,7 @@ const readCat = (req, res) => {
 };
 
 const readDog = (req, res) => {
-  const name1 = req.query.name;
+  const name1 = req.query.nameDog;
 
   // function to call when we get objects back from the database.
   // With Mongoose's find functions, you will get an err and doc(s) back
@@ -292,14 +292,14 @@ const updateLast = (req, res) => {
 
 const setNameDog = (req, res) => {
 
-  if (!req.body.name || !req.body.breed || !req.body.age) {
+  if (!req.body.nameDog || !req.body.breed || !req.body.age) {
     // if not respond with a 400 error
     // (either through json or a web page depending on the client dev)
     return res.status(400).json({ error: 'name, breed and age are all required' });
   }
 
   // if required fields are good, then set name
-  const nameDog = `${req.body.name}`;
+  const nameDog = `${req.body.nameDog}`;
 
   // dummy JSON to insert into database
   const dogData = {
@@ -319,7 +319,7 @@ const setNameDog = (req, res) => {
     // This way we can update it dynamically
     lastAddedDog = newDog;
     // return success
-    res.json({ name: lastAddedDog.name, breed: lastAddedDog.breed, age: lastAddedDog.age });
+    res.json({ nameDog: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age });
   });
 
   // if error, return it
@@ -340,7 +340,7 @@ const searchNameDog = (req, res) => {
   // For POST requests like the other ones in here, those come in a
   // request body because they aren't a query
   // POSTS send data to add while GETS query for a page or data (such as a search)
-  if (!req.query.name) {
+  if (!req.query.nameDog) {
     return res.json({ error: 'Name is required to perform a search' });
   }
 
@@ -351,7 +351,7 @@ const searchNameDog = (req, res) => {
   // together so it's easier to see how the system works
   // For that reason, I gave it an anonymous callback instead of a
   // named function you'd have to go find
-  return Dog.findByName(req.query.name, (err, doc) => {
+  return Dog.findByName(req.query.nameDog, (err, doc) => {
     // errs, handle them
     if (err) {
       return res.json({ err }); // if error, return it
@@ -364,7 +364,7 @@ const searchNameDog = (req, res) => {
     }
 
     // if a match, send the match back
-    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
+    return res.json({ nameDog: doc.nameDog, breed: doc.breed, age: doc.age });
   });
 };
 
@@ -388,7 +388,7 @@ const updateLastDog = (req, res) => {
   const savePromiseDog = lastAdded.save();
 
   // send back the name as a success for now
-  savePromiseDog.then(() => res.json({ name: lastAddedDog.name, breed: lastAddedDog.breed, age: lastAddedDog.age }));
+  savePromiseDog.then(() => res.json({ nameDog: lastAddedDog.nameDog, breed: lastAddedDog.breed, age: lastAddedDog.age }));
 
   // if save error, just return an error for now
   savePromiseDog.catch((err) => res.json({ err }));
