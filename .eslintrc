@@ -5,6 +5,5 @@
 	"no-plusplus": "off",
     "no-console": "off",
     "no-unused-vars" : 0
-    "no-max-len" : "off",
   }
 }
