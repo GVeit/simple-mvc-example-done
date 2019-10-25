@@ -312,7 +312,7 @@ const setNameDog = (req, res) => {
 
   // dummy JSON to insert into database
   const dogData = {
-    nameDog,
+    name: req.body.nameDog,
     breed: req.body.breed,
     age: req.body.age,
   };
@@ -373,7 +373,7 @@ const searchNameDog = (req, res) => {
     }
 
     // if a match, send the match back
-    return res.json({ nameDog: doc.nameDog, breed: doc.breed, age: doc.age });
+    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
   });
 };
 
