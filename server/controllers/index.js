@@ -415,6 +415,7 @@ module.exports = {
   page3: hostPage3,
   page4: hostPage4,
   readCat,
+  readDog,
   getName,
   setName,
   setNameDog,
