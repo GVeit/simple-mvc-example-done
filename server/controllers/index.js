@@ -345,7 +345,7 @@ const searchNameDog = (req, res) => {
   // For POST requests like the other ones in here, those come in a
   // request body because they aren't a query
   // POSTS send data to add while GETS query for a page or data (such as a search)
-  if (!req.query.name) {
+  if (!req.query.nameDog) {
     return res.json({ error: 'Name is required to perform a search' });
   }
 
